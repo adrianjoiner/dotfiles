@@ -67,8 +67,16 @@ quickstart() {
     cd ~/dev/Repos/ && git clone "$1" && cd $(basename $_ .git) && code .
 }
 
+# set docker host
 dh() {
     export DOCKER_HOST="tcp://$1"
+}
+
+# create directoruy and cd into it
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
 }
 
 eval "$(chef shell-init zsh)"
