@@ -72,6 +72,11 @@ dh() {
     export DOCKER_HOST="tcp://$1"
 }
 
+# set secure docker host
+dhs() {
+    export DOCKER_HOST="tls://$1:2376"
+}
+
 # create directoruy and cd into it
 mkcdir ()
 {
