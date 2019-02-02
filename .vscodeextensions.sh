@@ -48,6 +48,9 @@ code --install-extension bungcip.better-toml
 # TextMate support
 code --install-extension togusa09.tmlanguage
 
+# .env files
+code --install-extension mikestead.dotenv
+
 # React native support
 code --install-extension vsmobile.vscode-react-native
 
