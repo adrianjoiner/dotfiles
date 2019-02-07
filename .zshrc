@@ -69,16 +69,22 @@ quickstart() {
 
 # set docker host
 dh() {
+    unset DOCKER_HOST
+    unset DOCKER_TLS_VERIFY
+    unset DOCKER_CERT_PATH
     export DOCKER_HOST="tcp://$1"
 }
 
 # set secure docker host
 dhs() {
+    unset DOCKER_HOST
+    export DOCKER_TLS_VERIFY=1
+    export DOCKER_CERT_PATH=~/dev/docker/certs/$1
     export DOCKER_HOST="tcp://$1:2376"
 }
 
 # create directoruy and cd into it
-mkcdir ()
+mkdirc ()
 {
     mkdir -p -- "$1" &&
       cd -P -- "$1"
