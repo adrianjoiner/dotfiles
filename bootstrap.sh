@@ -55,20 +55,15 @@ echo "\nStarting install of fonts"
 source $DOTFILES/.fonts.sh
 
 echo "\nInstalling Python packages..."
-PYTHON_PACKAGES=(
-    ipython
-    virtualenv
-    virtualenvwrapper
-)
-sudo pip install ${PYTHON_PACKAGES[@]}
+sudo pip install ipython
+sudo pip install virtualenv 
+sudo pip install virtualenvwrapper
 
 echo "\nInstalling Ruby gems"
-RUBY_GEMS=(
-    bundler
-    filewatcher
-    cocoapods
-)
-sudo gem install ${RUBY_GEMS[@]}
+sudo gem install bundler
+sudo gem install filewatcher
+sudo gem install cocoapods
+sudo gem install rufo
 
 echo "\nInstalling global npm packages..."
 npm install marked -g
