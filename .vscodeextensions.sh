@@ -35,6 +35,7 @@ code --install-extension ms-vscode.go
 
 # Ruby
 code --install-extension rebornix.ruby
+code --install-extension mbessey.vscode-rufo
 
 # ES Lint
 code --install-extension dbaeumer.vscode-eslint
