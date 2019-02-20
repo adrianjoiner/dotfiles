@@ -67,6 +67,11 @@ quickstart() {
     cd ~/dev/Repos/ && git clone "$1" && cd $(basename $_ .git) && code .
 }
 
+# quickstart no vs code
+quickstartnc() {
+    cd ~/dev/Repos/ && git clone "$1" && cd $(basename $_ .git)
+}
+
 # set docker host
 dh() {
     unset DOCKER_HOST
