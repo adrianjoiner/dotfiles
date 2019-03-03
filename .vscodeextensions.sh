@@ -4,8 +4,6 @@ echo "Installing VS Code"
 brew cask install visual-studio-code
 
 echo "Installing extensions for embedded development"
-# Arduino
-code --install-extension vsciot-vscode.vscode-arduino
 
 # Platform IO
 code --install-extension platformio.platformio-ide
