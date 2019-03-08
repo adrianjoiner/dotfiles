@@ -28,7 +28,7 @@ while true; do sudo -n true; sleep 60; kill -0 \"$$\" || exit; done 2>/dev/null 
 
 
 # Load environment variables
-source $HOME/dotfiles/.dotfiles_env
+source .dotfiles_env
 
 # Start with the homebrew stuff
 echo "\nStarting install of casks and packages"
@@ -43,16 +43,16 @@ fi
 brew update
 
 echo "\nStarting install of packages"
-source $DOTFILES/.packages.sh
+source .packages.sh
 
 echo "Cleaning up..."
 brew cleanup
 
 echo "\nInstalling casks..."
-source $DOTFILES/.casks.sh
+source .casks.sh
 
 echo "\nStarting install of fonts"
-source $DOTFILES/.fonts.sh
+source .fonts.sh
 
 echo "\nInstalling Python packages..."
 sudo pip install ipython
@@ -69,13 +69,13 @@ echo "\nInstalling global npm packages..."
 npm install marked -g
 
 echo "\nConfiguring OSX..."
-source $DOTFILES/.macos.sh
+source .macos.sh
 
 echo "\nStarting VS Code and extensions."
-source $DOTFILES/.vscodeextensions
+source .vscodeextensions
 
 echo "\nInstalling terminal replacement - iTerm + zsh +oh my zsh"
-source $DOTFILES/.zshsetup.sh
+source .zshsetup.sh
     
 #echo "Installing Mac App Store apps"
 #source $DOTFILES/.mas.sh
