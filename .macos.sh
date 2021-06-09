@@ -1,4 +1,4 @@
-COMPUTER_NAME="orac"
+COMPUTER_NAME="byron-bay"
 
 ## Add a real one before running
 $SSH_PASSPHRASE="Password"
@@ -7,10 +7,7 @@ osascript -e 'tell application "System Preferences" to quit'
 
 
 echo "Creating new SSH key - feel free to overwrite if you have a backup"
-if [[$SSH_PASSPHRASE = "Password"]]
-	read -p "Enter a proper SSH passphrase: " SSH_PASSPHRASE
-fi
-ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N SSH_PASSPHRASE
+ssh-keygen -t ed25519 -C "adrianjoiner@gmail.com"
 
 ###############################################################################
 # General UI/UX                                                               #
@@ -40,12 +37,6 @@ defaults write com.apple.sound.beep.feedback -bool false
 
 echo "Disable the sound effects on boot"
 sudo nvram SystemAudioVolume=" "
-
-echo "Menu bar: disable transparency"
-defaults write com.apple.universalaccess reduceTransparency -bool true
-
-echo "Menu bar: show battery percentage"
-defaults write com.apple.menuextra.battery ShowPercent YES
 
 echo "Expand save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -84,11 +75,6 @@ echo "Configuring input devices"
 echo "Disable "natural" scroll"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-echo "Trackpad: enable tap to click for this user and for the login screen"
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
 echo "Increase sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
@@ -104,12 +90,6 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
 echo "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-echo "Automatically illuminate built-in MacBook keyboard in low light"
-defaults write com.apple.BezelServices kDim -bool true
-
-echo "Turn off keyboard illumination when computer is not used for 5 minutes"
-defaults write com.apple.BezelServices kDimTime -int 300
 
 echo "Setting language and text formats to UK"
 defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
@@ -127,14 +107,6 @@ sudo systemsetup -settimezone "Europe/Amsterdam" > /dev/null
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
-echo "Setting screen configurations"
-echo "Require password immediately after sleep or screen saver begins"
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-
-echo "Save screenshots to the desktop"
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
-
 echo "Save screenshots in PNG format"
 #  other options: BMP, GIF, JPG, PDF, TIFF
 defaults write com.apple.screencapture type -string "png"
@@ -183,11 +155,6 @@ echo "Avoid creating .DS_Store files on network or USB volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-echo "Disable disk image verification"
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-
 echo "Use AirDrop over every interface."
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
@@ -197,7 +164,7 @@ echo "Always open everything in Finder's list view."
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 echo "Disable the warning before emptying the Trash"
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+#defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 ###############################################################################
 # Dock                                                                        #
@@ -241,10 +208,10 @@ defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
 
 echo "Show the full URL in the address bar (note: this still hides the scheme)"
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+#defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 echo "Set Safari’s home page to `about:blank` for faster loading"
-defaults write com.apple.Safari HomePage -string "about:blank"
+#defaults write com.apple.Safari HomePage -string "about:blank"
 
 echo "Prevent Safari from opening ‘safe’ files automatically after downloading"
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
@@ -253,13 +220,13 @@ echo "Allow hitting the Backspace key to go to the previous page in history"
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
 echo "Hide Safari’s bookmarks bar by default"
-defaults write com.apple.Safari ShowFavoritesBar -bool false
+#defaults write com.apple.Safari ShowFavoritesBar -bool false
 
 echo "Disable Safari’s thumbnail cache for History and Top Sites"
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+#defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
 echo "Hide Safari’s sidebar in Top Sites"
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+#defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
 echo "Remove useless icons from Safari’s bookmarks bar"
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
@@ -305,13 +272,6 @@ defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
 ###############################################################################
 # Spotlight                                                                   #
 ###############################################################################
-echo "Configuring Spotlight search"
-# Hide Spotlight tray-icon (and subsequent helper)
-#sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-# Disable Spotlight indexing for any volume that gets mounted and has not yet
-# been indexed before.
-# Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
 echo "Changing indexing order and disable some file types"
 defaults write com.apple.spotlight orderedItems -array \
@@ -387,11 +347,11 @@ echo "Configuring AppStore"
 # Enable Debug Menu in the Mac App Store
 #defaults write com.apple.appstore ShowDebugMenu -bool true
 
-echo "Enable the automatic update check"
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+#echo "Enable the automatic update check"
+#defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 
-echo "Check for software updates daily, not just once per week"
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+#echo "Check for software updates daily, not just once per week"
+#defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 echo "Download newly available updates in background"
 defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
@@ -399,8 +359,8 @@ defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
 # Install System data files & security updates
 ##defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 
-echo "Enable **app** auto-update"
-defaults write com.apple.commerce AutoUpdate -bool true
+#echo "Enable **app** auto-update"
+#defaults write com.apple.commerce AutoUpdate -bool true
 
 echo "Prevent auto-reboot on macOS updates"
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool false

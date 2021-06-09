@@ -29,8 +29,6 @@ brew install libdvdcss
 brew install libidn2
 brew install libunistring
 brew install links
-brew install mono
-brew install neofetch
 brew install nmap
 brew install node
 brew install node-build
@@ -42,25 +40,18 @@ brew install pcre
 brew install pkg-config
 brew install python
 brew install python3 
+brew install python3.9
 brew install qt
 brew install readline
 brew install rename
 brew install sphinx-doc
-brew install sqlite
 brew install ssh-copy-id
-brew install terraform
-brew install the_silver_searcher
 brew install tmux
-brew install todolist
 brew install tree
 brew install unrar
 brew install watch
 brew install watchman
 brew install wget
-brew install yarn
 brew install z
-brew install zsh
-brew install zsh-syntax-highlighting
-brew install zsh-completions
 
 echo "Finished installing packages."

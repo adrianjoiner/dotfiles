@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Installing VS Code"
-brew cask install visual-studio-code
+#brew cask install visual-studio-code
 
 echo "Installing extensions for embedded development"
 
@@ -10,13 +10,13 @@ code --install-extension platformio.platformio-ide
 
 echo "Installing DevOps extensions"
 # Cake
-code --install-extension cake-build.cake-vscode
+#code --install-extension cake-build.cake-vscode
 
 # Inspec
-code --install-extension burtlo.inspec
+#code --install-extension burtlo.inspec
 
 # Chef
-code --install-extension pendrica.chef
+#code --install-extension pendrica.chef
 
 # Docker
 code --install-extension peterjausovec.vscode-docker
